@@ -1,0 +1,5 @@
+This Is An Example Keyfile
+Replace With Secure Key Between 6 And 1024 Characters
+May Only Contain Characters In The Base64 Character Set
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+MongoDB automatically strips whitespace for for cross platform convenience
