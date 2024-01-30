@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  mongo1:
+    image: mongo:7
+    container_name: mongo1
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo1_data:/data/db
+      - mongo1_config:/data/config
+    networks:
+      - mongo_ha_rs_network
+
+volumes:
+  mongo1_data:
+    name: mongo1_data
+  mongo1_config:
+    name: mongo1_config
+
+networks:
+  mongo_ha_rs_network:
+    driver: bridge
