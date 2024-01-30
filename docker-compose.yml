@@ -9,7 +9,25 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongo1_data:/data/db
-      - mongo1_config:/data/config
+      - mongo1_config:/data/configdb
+    networks:
+      - mongo_ha_rs_network
+
+  mongo2:
+    image: mongo:7
+    container_name: mongo2
+    volumes:
+      - mongo2_data:/data/db
+      - mongo2_config:/data/configdb
+    networks:
+      - mongo_ha_rs_network
+
+  mongo3:
+    image: mongo:7
+    container_name: mongo3
+    volumes:
+      - mongo3_data:/data/db
+      - mongo3_config:/data/configdb
     networks:
       - mongo_ha_rs_network
 
@@ -18,6 +36,14 @@ volumes:
     name: mongo1_data
   mongo1_config:
     name: mongo1_config
+  mongo2_data:
+    name: mongo2_data
+  mongo2_config:
+    name: mongo2_config
+  mongo3_data:
+    name: mongo3_data
+  mongo3_config:
+    name: mongo3_config
 
 networks:
   mongo_ha_rs_network:
