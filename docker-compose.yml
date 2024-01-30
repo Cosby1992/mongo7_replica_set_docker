@@ -2,11 +2,15 @@ version: '3.9'
 
 services:
   mongo1:
-    image: mongo:7
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: mongo1
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - 27017:27017
     volumes:
       - mongo1_data:/data/db
       - mongo1_config:/data/configdb
@@ -14,8 +18,12 @@ services:
       - mongo_ha_rs_network
 
   mongo2:
-    image: mongo:7
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: mongo2
+    ports:
+      - 27018:27017
     volumes:
       - mongo2_data:/data/db
       - mongo2_config:/data/configdb
@@ -23,8 +31,12 @@ services:
       - mongo_ha_rs_network
 
   mongo3:
-    image: mongo:7
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: mongo3
+    ports:
+      - 27019:27017
     volumes:
       - mongo3_data:/data/db
       - mongo3_config:/data/configdb
