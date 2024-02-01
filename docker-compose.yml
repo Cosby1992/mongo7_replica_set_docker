@@ -43,6 +43,23 @@ services:
     networks:
       - mongo_ha_rs_network
 
+  backup_service:
+    build: 
+      context: ./backup
+      dockerfile: Dockerfile.backup_service
+    container_name: backup_service
+    environment:
+      - MONGO_REPLICA_SET_NAME=${MONGO_REPLICA_SET_NAME}
+      - MONGO_REPLICA_SET_HOSTS=${MONGO_REPLICA_SET_HOSTS}
+      - MONGO_BACKUP_USER=${MONGO_BACKUP_USER}
+      - MONGO_BACKUP_PASSWORD=${MONGO_BACKUP_PASSWORD}
+      - MONGO_AUTHENTICATION_DATABASE=${MONGO_AUTHENTICATION_DATABASE}
+      - MONGO_BACKUP_FROM=${MONGO_BACKUP_FROM}
+    volumes:
+      - C:/code/_testing/mongo7_replica_set_docker/backup/test:/mongodb_backup
+    networks:
+      - mongo_ha_rs_network
+
 volumes:
   mongo1_data:
     name: mongo1_data

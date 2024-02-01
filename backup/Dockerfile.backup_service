@@ -1,0 +1,25 @@
+# Use the official MongoDB 7 image as the base image
+FROM mongo:7
+
+ENV \
+    MONGO_REPLICA_SET_NAME=$MONGO_REPLICA_SET_NAME  \
+    MONGO_REPLICA_SET_HOSTS=${MONGO_REPLICA_SET_HOSTS}  \
+    MONGO_BACKUP_USER=${MONGO_BACKUP_USER}  \
+    MONGO_BACKUP_PASSWORD=${MONGO_BACKUP_PASSWORD}  \
+    MONGO_AUTHENTICATION_DATABASE=${MONGO_AUTHENTICATION_DATABASE}  \
+    MONGO_BACKUP_FROM=${MONGO_BACKUP_FROM}  \
+    MONGO_BACKUP_DIR="/mongodb_backup"
+
+VOLUME /mongo_backup
+
+# Set the working directory inside the container
+WORKDIR /usr/src/mongo_backup
+
+# Copy the script into the container
+COPY mongodump_backup.sh .
+
+# Modify script permissions to make it executable
+RUN chmod +x mongodump_backup.sh
+
+# Run the script when the container starts
+CMD ["./mongodump_backup.sh"]
