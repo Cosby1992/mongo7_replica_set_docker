@@ -133,17 +133,11 @@ By specifying priorities during replica set initialization, you gain greater con
 
 ## Maintenance
 
-- To stop the MongoDB replica set cluster, use:
+### Backup
+This part will contain documentation for backups and restoration of backups in the mongodb replica set.
 
-  ```bash
-  docker-compose down
-  ```
-
-- To remove all volumes associated with the cluster, use:
-
-  ```bash
-  docker-compose down -v
-  ```
+#### Strategy
+The strategy for backup in this project is automatic mongodump backups.
 
 ## Useful MongoDB Replica Set Commands/Functions
 
